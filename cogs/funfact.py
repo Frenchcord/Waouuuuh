@@ -1,5 +1,7 @@
 from nextcord.ext import commands
 from random import randint
+import requests
+from os import environ
 funfactlist: list = [
   'Ce module s\'est fait faire parce que les modules existant sont pas opti',
   'Ce module s\'est fait coder par un clavier à 20 $',
@@ -16,7 +18,10 @@ class Funfact(commands.Cog):
 
   @commands.command()
   async def funfact(self, ctx):
-    await ctx.send(f'Fun fact : {funfactlist[randint(0, len(funfactlist))]}')
+    payload: dict = {
+      'content': f'Fun fact : {funfactlist[randint(0, len(funfactlist))]}'
+    }
+    requests.post(f'https://discord.com/api/v10/channels/{ctx.channel.id}/messages', headers={'authorization': 'Bot ' + environ['token']}, data=payload)
 
 def setup(bot):
   bot.add_cog(Funfact(bot))
