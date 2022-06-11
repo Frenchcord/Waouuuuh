@@ -10,8 +10,9 @@ class Ready(commands.Cog):
     print('online')
     guild = self.bot.get_guild(978859818511110154)
     await guild.get_channel(984958731693482065).purge(limit=2)
+    role = guild.get_role(978860094932529214)
     for member in guild.members:
-      if 978860094932529214 not in [role.id for role in member.roles] and member.bot is False: await member.add_roles(guild.get_role(978860094932529214))
+      if 978860094932529214 not in [role.id for role in member.roles] and member.bot is False: await member.add_roles(role)
     await guild.get_channel(985020834320105522).send('Jeg er pålogget')
     await ping_message(self.bot)
 
