@@ -1,4 +1,5 @@
 import nextcord
+from utils import add_role, rem_role
 class ping_buttons(nextcord.ui.View):
   def __init__(self):
     super().__init__(timeout = None)
@@ -6,27 +7,27 @@ class ping_buttons(nextcord.ui.View):
 
   @nextcord.ui.button(label="update", style = nextcord.ButtonStyle.gray)
   async def update(self, button : nextcord.ui.Button, interaction : nextcord.Interaction):
-    role = interaction.guild.get_role(984999472268443648)
-    if 984999472268443648 in [role.id for role in interaction.user.roles]:
-      await interaction.user.remove_roles(role)
+    role_id: int = 984999472268443648
+    if role_id not in [role.id for role in interaction.user.roles]:
+      add_role(978859818511110154, interaction.user.id, role_id)
     else:
-      await interaction.user.add_roles(role)
+      rem_role(978859818511110154, interaction.user.id, role_id)
 
   @nextcord.ui.button(label="daily update", style = nextcord.ButtonStyle.gray)
   async def daily(self, button : nextcord.ui.Button, interaction : nextcord.Interaction):
-    role = interaction.guild.get_role(984999531307466823)
-    if 984999531307466823 in [role.id for role in interaction.user.roles]:
-      await interaction.user.remove_roles(role)
+    role_id: int = 984999531307466823
+    if role_id not in [role.id for role in interaction.user.roles]:
+      add_role(978859818511110154, interaction.user.id, role_id)
     else:
-      await interaction.user.add_roles(role)
+      rem_role(978859818511110154, interaction.user.id, role_id)
 
   @nextcord.ui.button(label="alpha tester", style = nextcord.ButtonStyle.gray)
   async def alpha(self, button : nextcord.ui.Button, interaction : nextcord.Interaction):
-    role = interaction.guild.get_role(984999569223974993)
-    if 984999569223974993 in [role.id for role in interaction.user.roles]:
-      await interaction.user.remove_roles(role)
+    role_id: int = 984999569223974993
+    if role_id not in [role.id for role in interaction.user.roles]:
+      add_role(978859818511110154, interaction.user.id, role_id)
     else:
-      await interaction.user.add_roles(role)
+      rem_role(978859818511110154, interaction.user.id, role_id)
   
 async def ping_message(bot):
   view = ping_buttons()
