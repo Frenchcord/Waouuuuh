@@ -12,8 +12,12 @@ class Ready(commands.Cog):
     await guild.get_channel(984958731693482065).purge(limit=2)
     for member in guild.members:
       if 978860094932529214 not in [role.id for role in member.roles] and member.bot is False: await member.add_roles(guild.get_role(978860094932529214))
-    await guild.get_channel(985020834320105522).send('Jeg er pålogget') # Norwegian ❤️
+    await guild.get_channel(985020834320105522).send('Jeg er pålogget')
     await ping_message(self.bot)
+
+  @commands.Cog.listener('on_member_join')
+  async def join(self, member):
+    await member.add_roles(member.guild.get_role(978860094932529214))
 
 def setup(bot):
   bot.add_cog(Ready(bot))
