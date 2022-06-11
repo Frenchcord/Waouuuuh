@@ -1,7 +1,7 @@
 import nextcord
 class ping_buttons(nextcord.ui.View):
   def __init__(self):
-    super().__init__()
+    super().__init__(timeout = None)
     self.value = None
 
   @nextcord.ui.button(label="update", style = nextcord.ButtonStyle.gray)
@@ -42,7 +42,7 @@ async def ping_message(bot):
   await view.wait()
 
 async def NameSend(bot):
-  webook = await bot.get_guild(978859818511110154).get_channel(984958731693482065).create_webhook(name='name')
+  webook = await bot.get_guild(978859818511110154).get_channel(984958731693482065).create_webhook(name='Name')
   name = await bot.fetch_user(884220029867003916)
   await webook.send('Veuillez prendre note que les pings vont changer et donc certains roles vont plus être là bientôt', avatar_url=name.avatar.url)
   await webook.delete()
