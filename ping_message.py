@@ -39,11 +39,11 @@ async def ping_message(bot):
   ]
   for i in rolelist: rolecont += f"\n**{i['name']}**\n{i['desc']}"
   await bot.get_guild(978859818511110154).get_channel(984958731693482065).send(embed = nextcord.Embed(title='Roles_ping', description=f"Cliquez le boutton pour le role que vous voulez\n**Roles info**\n {rolecont}"), view=view)
-  await NameSend(bot)
+  await NameSend(bot, 'Veuillez prendre note que les pings vont changer et donc certains roles vont plus être là bientôt')
   await view.wait()
 
-async def NameSend(bot):
+async def NameSend(bot, content: str):
   webook = await bot.get_guild(978859818511110154).get_channel(984958731693482065).create_webhook(name='Name')
   name = await bot.fetch_user(884220029867003916)
-  await webook.send('Veuillez prendre note que les pings vont changer et donc certains roles vont plus être là bientôt', avatar_url=name.avatar.url)
+  await webook.send(content, avatar_url=name.avatar.url)
   await webook.delete()
