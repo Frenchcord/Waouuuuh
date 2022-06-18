@@ -1,5 +1,5 @@
 import nextcord
-from utils import add_role, rem_role
+from utils import add_role, rem_role, namesend
 class ping_buttons(nextcord.ui.View):
   def __init__(self):
     super().__init__(timeout = None)
@@ -38,12 +38,7 @@ async def ping_message(bot):
     {"name": "Alpha tester", "desc": "\"Un og ticket\"\nVous allez vous faire pings à chaque update de version, Alpha (0.0.1 jusqu'à 1.0.0)"}
   ]
   for i in rolelist: rolecont += f"\n**{i['name']}**\n{i['desc']}"
-  await bot.get_guild(978859818511110154).get_channel(984958731693482065).send(embed = nextcord.Embed(title='Roles_ping', description=f"Cliquez le boutton pour le role que vous voulez\n**Roles info**\n {rolecont}"), view=view)
-  await NameSend(bot, 'Veuillez prendre note que les pings vont changer et donc certains roles vont plus être là bientôt')
+  channel = bot.get_guild(978859818511110154).get_channel(984958731693482065)
+  await channel.send(embed = nextcord.Embed(title='Roles_ping', description=f"Cliquez le boutton pour le role que vous voulez\n**Roles info**\n {rolecont}"), view=view)
+  await namesend(bot, 'Veuillez prendre note que les pings vont changer et donc certains roles vont plus être là bientôt', channel)
   await view.wait()
-
-async def NameSend(bot, content: str):
-  webook = await bot.get_guild(978859818511110154).get_channel(984958731693482065).create_webhook(name='Name')
-  name = await bot.fetch_user(884220029867003916)
-  await webook.send(content, avatar_url=name.avatar.url)
-  await webook.delete()
